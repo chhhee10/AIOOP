@@ -88,8 +88,8 @@ npm run preview
 
 ```
 src/
-├── pages/              - Page components (Home, Activities, Notices, etc.)
-├── components/         - Reusable UI components
+├── pages/             - Page components (Home, Activities, Notices, etc.)
+├── components/        - Reusable UI components
 │   └── ui/            - Component library
 ├── i18n/              - Language and translation configuration
 ├── hooks/             - Custom React hooks
