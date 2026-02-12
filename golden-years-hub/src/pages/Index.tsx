@@ -48,11 +48,11 @@ export default function Index() {
               <p className="text-body-lg text-muted-foreground leading-relaxed">{t.home.missionDesc}</p>
               <div className="mt-10 flex gap-6">
                 <div className="bg-card rounded-xl p-6 shadow-soft text-center min-w-[140px]">
-                  <span className="font-display font-bold text-3xl text-foreground">25+</span>
+                  <span className="font-display font-bold text-3xl text-foreground">20+</span>
                   <p className="text-sm text-muted-foreground mt-1 uppercase tracking-wider">{t.home.yearsService}</p>
                 </div>
                 <div className="bg-card rounded-xl p-6 shadow-soft text-center min-w-[140px]">
-                  <span className="font-display font-bold text-3xl text-foreground">5000+</span>
+                  <span className="font-display font-bold text-3xl text-foreground">200+</span>
                   <p className="text-sm text-muted-foreground mt-1 uppercase tracking-wider">{t.home.members}</p>
                 </div>
               </div>
