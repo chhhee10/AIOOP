@@ -16,18 +16,18 @@ export default function Activities() {
   ];
 
   return (
-    <div className="container mx-auto px-4 lg:px-8">
+    <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
       <PageHeader title={t.activities.title} description={t.activities.desc} />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 pb-20">
         {activities.map((item, i) => (
           <div
             key={i}
-            className="bg-card rounded-2xl p-8 shadow-soft border-t-4 border-primary/20 hover:border-primary transition-colors animate-fade-in"
+            className="bg-card rounded-2xl p-6 md:p-8 lg:p-10 shadow-soft border-t-4 border-primary/20 hover:border-primary transition-colors animate-fade-in"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <h3 className="font-display font-bold text-xl text-primary mb-3">{item.title}</h3>
-            <p className="text-muted-foreground text-body-md mb-6">{item.desc}</p>
-            <div className="border-t border-border pt-4 flex flex-col gap-2 text-sm text-muted-foreground">
+            <h3 className="font-display font-bold text-lg md:text-xl text-primary mb-4">{item.title}</h3>
+            <p className="text-muted-foreground text-sm md:text-body-md mb-8">{item.desc}</p>
+            <div className="border-t border-border pt-4 md:pt-6 flex flex-col gap-2 md:gap-3 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CalendarDays className="w-4 h-4 text-primary" />
                 {t.activities.regularSchedule}

@@ -14,29 +14,29 @@ export default function Notices() {
   const { language, t } = useLanguage();
 
   return (
-    <div className="container mx-auto px-4 lg:px-8">
+    <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
       <PageHeader title={t.notices.title} description={t.notices.desc} />
-      <div className="flex flex-col gap-6 pb-20 max-w-4xl">
+      <div className="flex flex-col gap-6 md:gap-8 pb-20 max-w-4xl">
         {noticesData.map((notice, i) => (
           <div
             key={i}
-            className="bg-card rounded-2xl p-6 shadow-soft flex gap-6 border-l-4 border-primary animate-fade-in"
+            className="bg-card rounded-2xl p-6 md:p-8 shadow-soft flex gap-4 md:gap-6 border-l-4 border-primary animate-fade-in"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className="bg-accent rounded-xl p-4 text-center min-w-[80px] shrink-0">
-              <span className="font-display font-bold text-2xl text-primary block">{notice.day}</span>
+            <div className="bg-accent rounded-xl p-4 md:p-5 text-center min-w-[90px] shrink-0">
+              <span className="font-display font-bold text-2xl md:text-3xl text-primary block">{notice.day}</span>
               <span className="text-xs font-semibold text-primary uppercase">{notice.month}</span>
               <span className="text-xs text-muted-foreground block">{notice.year}</span>
             </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
                 <Bell className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">{notice.type}</span>
+                <span className="text-xs md:text-sm text-muted-foreground">{notice.type}</span>
               </div>
-              <h3 className="font-display font-bold text-xl text-foreground mb-2">
+              <h3 className="font-display font-bold text-lg md:text-xl text-foreground mb-2">
                 {language === 'hi' ? notice.titleHi : notice.title}
               </h3>
-              <p className="text-muted-foreground text-body-md">
+              <p className="text-muted-foreground text-sm md:text-body-md">
                 {language === 'hi' ? notice.descHi : notice.desc}
               </p>
             </div>

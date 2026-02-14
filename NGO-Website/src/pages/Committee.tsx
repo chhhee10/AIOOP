@@ -31,33 +31,33 @@ export default function Committee() {
   const { language, t } = useLanguage();
 
   return (
-    <div className="container mx-auto px-4 lg:px-8">
+    <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
       <PageHeader title={t.committee.title} description={t.committee.desc} />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 pb-20">
         {members.map((m, i) => (
           <div
             key={i}
-            className="bg-card rounded-2xl p-6 shadow-soft border border-border animate-fade-in"
+            className="bg-card rounded-2xl p-6 md:p-8 shadow-soft border border-border animate-fade-in"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-accent flex items-center justify-center">
-                <UserRound className="w-7 h-7 text-primary" />
+            <div className="flex items-center gap-4 mb-5 md:mb-6">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent flex items-center justify-center shrink-0">
+                <UserRound className="w-7 h-7 md:w-8 md:h-8 text-primary" />
               </div>
-              <div>
-                <h3 className="font-display font-bold text-lg text-foreground">
+              <div className="min-w-0">
+                <h3 className="font-display font-bold text-base md:text-lg text-foreground truncate">
                   {language === 'hi' ? m.nameHi : m.name}
                 </h3>
-                <div className="flex items-center gap-1 text-primary text-sm">
-                  <Building className="w-4 h-4" />
-                  {language === 'hi' ? m.roleHi : m.role}
+                <div className="flex items-center gap-1 text-primary text-xs md:text-sm mt-1">
+                  <Building className="w-4 h-4 shrink-0" />
+                  <span className="truncate">{language === 'hi' ? m.roleHi : m.role}</span>
                 </div>
               </div>
             </div>
             {m.phone && (
-              <div className="flex items-center gap-2 text-muted-foreground text-sm border-t border-border pt-4">
-                <PhoneIcon className="w-4 h-4" />
-                {m.phone}
+              <div className="flex items-center gap-2 text-muted-foreground text-xs md:text-sm border-t border-border pt-4 md:pt-5">
+                <PhoneIcon className="w-4 h-4 shrink-0" />
+                <span className="truncate">{m.phone}</span>
               </div>
             )}
           </div>
