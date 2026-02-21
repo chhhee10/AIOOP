@@ -38,7 +38,7 @@ export default function Index() {
 
                   <div className="mt-6 md:mt-8 w-full sm:w-auto">
                     <a
-                      href="/Medicalform.pdf"
+                      href="/MedicalForm.pdf"
                       download
                       target="_blank"
                       rel="noopener noreferrer"
