@@ -1,36 +1,53 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, FileText, HeartPulse, CalendarDays, Download } from 'lucide-react';
+import { ArrowRight, FileText, HeartPulse, CalendarDays, Download, BookOpenText } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 export default function Index() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const magazineCopy =
+    language === 'hi'
+      ? {
+          badge: 'विशेष प्रकाशन',
+          title: 'AIOOP E-Magazine 2025-26',
+          desc: 'हमारी पेंशनर समुदाय की झलकियां, गतिविधियां और महत्वपूर्ण अपडेट इस डिजिटल मैगजीन में पढ़ें।',
+          open: 'मैगजीन खोलें',
+          download: 'PDF डाउनलोड करें',
+          issue: '2025-26 संस्करण',
+        }
+      : {
+          badge: 'Featured Publication',
+          title: 'AIOOP E-Magazine 2025-26',
+          desc: 'Explore highlights, activities, and important updates from our pensioner community in this digital magazine.',
+          open: 'Open Magazine',
+          download: 'Download PDF',
+          issue: '2025-26 Edition',
+        };
 
     return (
       <div>
         {/* Hero */}
-        <section className="bg-gradient-to-br from-accent via-background to-accent/50 py-16 md:py-24 lg:py-32">
+        <section className="bg-gradient-to-br from-accent via-background to-accent/50 py-10 md:py-24 lg:py-32">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
-            <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl">
-              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                <div className="w-full">
-                  <h2 className="font-serif font-extrabold text-3xl md:text-5xl lg:text-6xl leading-relaxed text-foreground mt-1">
+            <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.75fr)] lg:gap-14">
+              <div className="w-full max-w-2xl md:max-w-3xl">
+                  <h2 className="mt-1 font-serif text-[2.35rem] font-extrabold leading-tight text-foreground md:text-5xl md:leading-relaxed lg:text-6xl">
                     {t.home.heroHeadingLine1}
                     <span className="block mt-3 md:mt-2 lg:mt-4">{t.home.heroHeadingLine2}</span>
                   </h2>
-                  <p className="mt-4 md:mt-6 text-lg md:text-xl italic text-primary">{t.home.heroTitle1} <span className="block">{t.home.heroTitle2}</span></p>
-                  <p className="mt-6 md:mt-8 text-base md:text-body-lg text-muted-foreground max-w-2xl leading-relaxed">{t.home.heroDesc}</p>
+                  <p className="mt-3 text-base italic text-primary md:mt-6 md:text-xl">{t.home.heroTitle1} <span className="block">{t.home.heroTitle2}</span></p>
+                  <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground md:mt-8 md:text-body-lg">{t.home.heroDesc}</p>
 
-                  <div className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <div className="mt-6 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:items-center sm:gap-4">
                 <Link
                   to="/activities"
-                  className="inline-flex items-center justify-center w-full sm:w-auto whitespace-nowrap gap-2 px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium text-body-md hover:opacity-90 transition-opacity shadow-md"
+                  className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-md transition-opacity hover:opacity-90 sm:w-auto sm:px-8 sm:text-body-md"
                 >
                   {t.home.viewActivities}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center w-full sm:w-auto whitespace-nowrap gap-2 px-8 py-3 rounded-full border-2 border-primary/60 text-foreground font-medium text-body-md hover:bg-primary/5 transition-colors shadow-sm"
+                  className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-primary/60 px-6 py-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-primary/5 sm:w-auto sm:px-8 sm:text-body-md"
                 >
                   {t.home.contactUs}
                 </Link>
@@ -42,11 +59,70 @@ export default function Index() {
                       download
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-full sm:w-auto whitespace-nowrap gap-2 px-8 py-3 rounded-full border-2 border-primary/60 text-foreground font-medium text-body-md hover:bg-primary/5 transition-colors shadow-sm"
+                      className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-primary/60 px-6 py-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-primary/5 sm:w-auto sm:px-8 sm:text-body-md"
                     >
                       <Download className="w-4 h-4 mr-2" />
                       {t.home.medicalReimbursementPdf}
                     </a>
+                  </div>
+              </div>
+
+              <div className="mx-auto w-full max-w-[17rem] sm:max-w-[20rem] lg:max-w-[21.5rem]">
+                <div className="rounded-[1.5rem] border border-primary/20 bg-card/90 p-2.5 shadow-[0_24px_60px_-24px_rgba(120,0,20,0.45)] backdrop-blur sm:rounded-[1.75rem] sm:p-3">
+                  <a
+                    href="/E_Magazine_25_26.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
+                  >
+                    <div className="relative mx-auto aspect-[3/4] max-w-[14rem] rounded-[1.25rem] border-[3px] border-primary bg-gradient-to-br from-card via-card to-accent/40 p-3 transition-transform duration-300 group-hover:-translate-y-1 sm:max-w-[16.5rem] sm:rounded-[1.5rem] sm:border-4 sm:p-4">
+                      <div className="flex items-center justify-between text-primary">
+                        <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] sm:px-3 sm:text-xs sm:tracking-[0.18em]">
+                          AIOOP
+                        </span>
+                        <BookOpenText className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </div>
+                      <div className="mt-6 sm:mt-8">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 sm:text-xs sm:tracking-[0.24em]">
+                          {magazineCopy.issue}
+                        </p>
+                        <h3 className="mt-2 font-serif text-[1.35rem] font-extrabold leading-tight text-foreground sm:mt-3 sm:text-[1.65rem]">
+                          E-Magazine
+                        </h3>
+                        <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground sm:mt-3 sm:text-xs">
+                          All India Organisation of Pensioners
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+
+                  <div className="mt-3 sm:mt-4">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/80 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-primary sm:text-[10px] sm:tracking-[0.16em]">
+                      <BookOpenText className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      {magazineCopy.badge}
+                    </div>
+                    <h3 className="mt-2 font-display text-lg font-bold leading-tight text-foreground sm:mt-3 sm:text-xl md:text-2xl">
+                      {magazineCopy.title}
+                    </h3>
+                    <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:gap-3">
+                      <a
+                        href="/E_Magazine_25_26.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-[11px] font-semibold text-primary-foreground shadow-md transition-opacity hover:opacity-90 sm:px-5 sm:text-xs"
+                      >
+                        <BookOpenText className="h-3.5 w-3.5" />
+                        {magazineCopy.open}
+                      </a>
+                      <a
+                        href="/E_Magazine_25_26.pdf"
+                        download
+                        className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary/30 bg-background px-4 py-2.5 text-[11px] font-semibold text-foreground transition-colors hover:bg-primary/5 sm:px-5 sm:text-xs"
+                      >
+                        <Download className="h-3.5 w-3.5" />
+                        {magazineCopy.download}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -55,14 +131,14 @@ export default function Index() {
         </section>
 
         {/* Mission + Quick Actions */}
-        <section className="py-16 md:py-24 lg:py-32">
+        <section className="py-12 md:py-24 lg:py-32">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
-            <div className="grid lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
+            <div className="grid gap-10 lg:grid-cols-2 md:gap-16 lg:gap-24">
               {/* Mission */}
               <div>
-                <h2 className="font-display font-bold text-display-md text-foreground italic mb-8">{t.home.missionTitle}</h2>
-                <p className="text-base md:text-body-lg text-muted-foreground leading-relaxed">{t.home.missionDesc}</p>
-                <div className="mt-12 md:mt-16 flex gap-6 flex-col sm:flex-row">
+                <h2 className="mb-6 font-display text-3xl font-bold italic text-foreground md:mb-8 md:text-display-md">{t.home.missionTitle}</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground md:text-body-lg">{t.home.missionDesc}</p>
+                <div className="mt-8 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:gap-6 md:mt-16">
                   <div className="bg-card rounded-xl p-6 md:p-8 shadow-soft text-center min-w-[140px]">
                     <span className="font-display font-bold text-3xl md:text-4xl text-foreground">20+</span>
                     <p className="text-xs md:text-sm text-muted-foreground mt-2 uppercase tracking-wider">{t.home.yearsService}</p>
@@ -72,12 +148,12 @@ export default function Index() {
                     <p className="text-xs md:text-sm text-muted-foreground mt-2 uppercase tracking-wider">{t.home.members}</p>
                   </div>
                 </div>
-                <div className="mt-10 md:mt-14">
+                <div className="mt-8 md:mt-14">
                   <a
-                    href="/MEMBER%20_LIST.pdf"
+                    href="/MEMBER_LIST.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 md:px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:w-auto md:px-8"
                   >
                     <FileText className="w-4 h-4" />
                     {t.home.memberListPdf}
@@ -86,8 +162,8 @@ export default function Index() {
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-card rounded-2xl p-6 md:p-8 lg:p-10 shadow-card">
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-foreground italic mb-8">{t.home.quickActions}</h3>
+              <div className="rounded-2xl bg-card p-5 shadow-card md:p-8 lg:p-10">
+                <h3 className="mb-6 font-display text-2xl font-bold italic text-foreground md:mb-8 md:text-3xl">{t.home.quickActions}</h3>
                 <div className="flex flex-col gap-4 md:gap-6">
                   {[
                     { icon: FileText, title: t.home.latestNotices, desc: t.home.checkUpdates, to: '/notices', color: 'bg-accent' },
