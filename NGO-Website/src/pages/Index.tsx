@@ -150,7 +150,7 @@ export default function Index() {
                 </div>
                 <div className="mt-8 md:mt-14">
                   <a
-                    href="/MEMBER_LIST.pdf"
+                    href="/AIOOP_LIST.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:w-auto md:px-8"
