@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Sun, Moon } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -9,9 +9,10 @@ import logo from "@/assets/logo.png";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 0));
   const { language, setLanguage, t } = useLanguage();
   const { isDark, toggleTheme } = useTheme();
-  const { increase, decrease } = useFontSize();
+  const { fontScale, increase, decrease } = useFontSize();
   const location = useLocation();
 
   const links = [
@@ -25,11 +26,25 @@ export default function Navbar() {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+  const shouldUseDesktopNav = windowWidth >= 1280 && fontScale <= 1;
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname, shouldUseDesktopNav]);
 
   return (
     <nav className="sticky top-0 z-50 bg-gradient-to-r from-background via-card to-background/80 backdrop-blur-md border-b border-primary/10 shadow-md">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-between h-auto md:h-20 py-3 md:py-0 gap-4 md:gap-6">
+        <div className="flex items-center justify-between h-auto md:h-20 py-3 md:py-0 gap-3 md:gap-4 xl:gap-6">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 min-w-0 flex-shrink-0">
             <img
@@ -44,26 +59,28 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {links.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-4 py-2 rounded-lg text-body-md font-medium transition-colors ${
-                  isActive(link.to)
-                    ? 'bg-accent text-accent-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+          {shouldUseDesktopNav && (
+            <div className="flex items-center gap-1">
+              {links.map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`px-4 py-2 rounded-lg text-body-md font-medium transition-colors ${
+                    isActive(link.to)
+                      ? 'bg-accent text-accent-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* Right actions */}
-          <div className="flex items-center gap-2 md:gap-3 shrink-0">
+          <div className="ml-auto flex items-center gap-2 md:gap-3 shrink-0">
             {/* Accessibility controls group */}
-            <div className="flex items-center gap-1 px-2 md:px-3 py-1.5 rounded-lg border border-primary/20 bg-muted/40 backdrop-blur-sm hover:bg-muted/60 transition-colors">
+            <div className="flex items-center gap-1 px-1.5 sm:px-2 md:px-3 py-1.5 rounded-lg border border-primary/20 bg-muted/40 backdrop-blur-sm hover:bg-muted/60 transition-colors">
               <button
                 onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
                 className="inline-flex items-center rounded overflow-hidden border border-primary/30 transition-colors hover:bg-muted/80"
@@ -98,26 +115,29 @@ export default function Navbar() {
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
             </div>
-            <Link
-              to="/contact"
-              className="hidden md:flex items-center gap-1 px-3 md:px-4 py-2 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium text-xs hover:shadow-lg hover:from-primary/90 hover:to-primary/70 transition-all shrink-0"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="hidden lg:inline">{t.nav.help}</span>
-            </Link>
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {shouldUseDesktopNav ? (
+              <Link
+                to="/contact"
+                className="flex items-center gap-1 px-3 md:px-4 py-2 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium text-xs hover:shadow-lg hover:from-primary/90 hover:to-primary/70 transition-all shrink-0"
+              >
+                <Phone className="w-4 h-4" />
+                <span>{t.nav.help}</span>
+              </Link>
+            ) : (
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            )}
           </div>
         </div>
 
         {/* Mobile Nav */}
-        {mobileOpen && (
-          <div className="lg:hidden pb-6 border-t border-border pt-4">
+        {!shouldUseDesktopNav && mobileOpen && (
+          <div className="pb-6 border-t border-border pt-4">
             <div className="flex flex-col gap-1">
               {links.map(link => (
                 <Link
