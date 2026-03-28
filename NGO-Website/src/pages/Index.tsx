@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, FileText, HeartPulse, CalendarDays, Download, BookOpenText } from 'lucide-react';
+import { ArrowRight, FileText, HeartPulse, CalendarDays, Download, BookOpenText, BellRing } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 export default function Index() {
   const { t, language } = useLanguage();
+  const noticeCueUntil = new Date('2026-03-29T10:00:00+05:30');
+  const showNoticeCue = new Date() < noticeCueUntil;
   const magazineCopy =
     language === 'hi'
       ? {
@@ -30,6 +32,19 @@ export default function Index() {
           <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
               <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.75fr)] lg:gap-14">
               <div className="w-full max-w-2xl md:max-w-3xl">
+                  {showNoticeCue && (
+                    <Link
+                      to="/notices"
+                      className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-2 text-[11px] font-semibold tracking-[0.02em] text-primary shadow-sm ring-1 ring-primary/10 transition-colors hover:border-primary/45 hover:bg-primary/15 md:mb-6 md:px-4 md:text-xs"
+                    >
+                      <BellRing className="h-3.5 w-3.5 shrink-0" />
+                      <span>
+                        {language === 'hi'
+                          ? 'कार्य समिति की नई बैठक सूचना उपलब्ध है'
+                          : 'New executive committee meeting notice is available'}
+                      </span>
+                    </Link>
+                  )}
                   <h2 className="mt-1 max-w-full break-words font-serif text-[1.9rem] font-extrabold leading-[0.95] text-foreground sm:text-[2.2rem] md:text-5xl md:leading-relaxed lg:text-6xl">
                     {t.home.heroHeadingLine1}
                     <span className="block mt-3 md:mt-2 lg:mt-4">{t.home.heroHeadingLine2}</span>
