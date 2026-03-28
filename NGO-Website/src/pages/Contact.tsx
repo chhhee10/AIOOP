@@ -27,6 +27,8 @@ export default function Contact() {
     },
   ];
 
+  const phoneHref = `tel:${t.contact.phone.replace(/[^\d+]/g, '')}`;
+
   return (
     <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
       <div className="mb-4 py-6 md:mb-5 md:py-10 lg:py-12">
@@ -96,9 +98,18 @@ export default function Contact() {
                     <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-primary md:text-xs md:tracking-[0.16em]">
                       {item.title}
                     </p>
-                    <p className="mt-1.5 text-sm font-medium leading-relaxed text-foreground md:mt-2 md:text-body-md">
-                      {item.label}
-                    </p>
+                    {item.icon === Phone ? (
+                      <a
+                        href={phoneHref}
+                        className="mt-1.5 inline-block text-sm font-medium leading-relaxed text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:mt-2 md:text-body-md"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <p className="mt-1.5 text-sm font-medium leading-relaxed text-foreground md:mt-2 md:text-body-md">
+                        {item.label}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
